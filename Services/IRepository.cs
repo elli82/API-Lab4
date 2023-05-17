@@ -3,19 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Lab4.Services
 {
-    public interface IRepository<T>
+    public interface IRepository
     {
-        Task<IEnumerable<T>> GetAll();
+        Task<IEnumerable<Person>> GetAll();
 
-        Task<T> GetById(int id);
+        //Task<Person> GetById(int id);
 
-        Task<T> Update(T entity);
+        //Task<Person> Update(Person entity);
 
-        Task<T> DeleteById(int id);
+        //Task<Person> DeleteById(int id);
 
-        Task<T> Add(T entity);
+        //Task<Person> Add(Person entity);
 
-        //added by VS
-        //Task<ActionResult<Person>> Update(Person pers);
+        Task<IEnumerable<Hobby>> GetPersonsHobbies(int Id);
+
+        Task<IEnumerable<Link>> GetPersonsLinks(int Id);
+
+        Task<int> AddHobbytoPerson(int HId, int PId);
+
+        Task<int> AddHobbyandLink(int PId, int HId, Link newLink);
     }
 }
