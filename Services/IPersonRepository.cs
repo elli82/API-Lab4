@@ -1,12 +1,15 @@
-﻿namespace API_Lab4.Services
+﻿using APIModels;
+
+namespace API_Lab4.Services
 {
+    public interface IPersonRepository<T> : IRepository<Person>
+    {
+        Task<IEnumerable<Hobby>> GetPersonsHobbies(int Id);
 
-    //misstag, denna klass ska inte finnas
+        Task<IEnumerable<Link>> GetPersonsLinks(int Id);
 
-    //public interface IPersonRepository
-    //{
-    //    object? GetPeople();
-    //    object GetPersonById(int id);
-    //    object GetPersonByName(string name);
-    //}
+        Task <int> AddHobbytoPerson(int HId, int PId);
+
+        Task<int> AddHobbyandLink(int PId, int HId, Link newLink);
+    }
 }
