@@ -1,6 +1,8 @@
 using API_Lab4.Data;
 using API_Lab4.Services;
+using APIModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IRepository, Repository>();
+
+
 //EF till Sql
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
