@@ -12,6 +12,7 @@ namespace API_Lab4.Data
         public DbSet<Person> Persons { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }
         public DbSet<Link> Links { get; set; }
+        public DbSet<PersonHobbyLink> HobbiesPersonsLinks{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,57 +70,101 @@ namespace API_Lab4.Data
                    Title = "Padel",
                    Description = "Enjoys a good match"                   
                });
-            
+            modelBuilder.Entity<Hobby>().
+               HasData(new Hobby
+               {
+                   HobbyId = 5,
+                   Title = "Puzzle",
+                   Description = "The best of the Christmas, when Santa brings a puzzle"
+               });
+
             //seed links
             modelBuilder.Entity<Link>().
                 HasData(new Link
                 {
                     LinkId = 1,
-                    WebLink = "https://www.varbergsridskola.se",
-                    HobbyId = 1,
-                    PersonId = 1                        
+                    WebLink = "https://www.varbergsridskola.se"
+                    
                 });
             modelBuilder.Entity<Link>().
                 HasData(new Link
                 {
                     LinkId = 2,
-                    WebLink = "https://www.lofsdalen.com/sv/skidakning",
-                    HobbyId = 2,
-                    PersonId = 1
+                    WebLink = "https://www.lofsdalen.com/sv/skidakning"                   
                 });
             modelBuilder.Entity<Link>().
                 HasData(new Link
                 {
                     LinkId = 3,
-                    WebLink = "https://www.skistar.com/sv/myskistar/destination/trysil/",
-                    HobbyId = 2,
-                    PersonId = 2
+                    WebLink = "https://www.skistar.com/sv/myskistar/destination/trysil/"                    
                 });
             modelBuilder.Entity<Link>().
                 HasData(new Link
                 {
                     LinkId = 4,
-                    WebLink = "https://www.visitvarberg.se/ovrigt/outdoor/outdoorsidor/fiska.html",
-                    HobbyId = 3,
-                    PersonId = 2
+                    WebLink = "https://www.visitvarberg.se/ovrigt/outdoor/outdoorsidor/fiska.html"                    
                 });
             modelBuilder.Entity<Link>().
                 HasData(new Link
                 {
                     LinkId = 5,
-                    WebLink = "https://minhast.se/",
-                    HobbyId = 1, 
-                    PersonId = 3
+                    WebLink = "https://minhast.se/"                    
                 });
             modelBuilder.Entity<Link>().
                 HasData(new Link
                 {
                     LinkId = 6,
-                    WebLink = "https://www.facebook.com/ponactive/",
-                    HobbyId = 4,
-                    PersonId = 3
+                    WebLink = "https://www.facebook.com/ponactive/"                    
                 });
-
+            modelBuilder.Entity<PersonHobbyLink>().HasData(new PersonHobbyLink
+            {
+                Id = 1,
+                PersonID = 1,
+                HobbyId= 1,
+                LinkId= 1
+            });
+            modelBuilder.Entity<PersonHobbyLink>().HasData(new PersonHobbyLink
+            {
+                Id = 2,
+                PersonID = 1,
+                HobbyId = 2,
+                LinkId = 2
+            });
+            modelBuilder.Entity<PersonHobbyLink>().HasData(new PersonHobbyLink
+            {
+                Id = 3,
+                PersonID = 1,
+                HobbyId = 2,
+                LinkId = 3
+            });
+            modelBuilder.Entity<PersonHobbyLink>().HasData(new PersonHobbyLink
+            {
+                Id = 4,
+                PersonID = 2,
+                HobbyId = 2,
+                LinkId = 2
+            });
+            modelBuilder.Entity<PersonHobbyLink>().HasData(new PersonHobbyLink
+            {
+                Id = 5,
+                PersonID = 2,
+                HobbyId = 3,
+                LinkId = 4
+            });
+            modelBuilder.Entity<PersonHobbyLink>().HasData(new PersonHobbyLink
+            {
+                Id = 6,
+                PersonID = 3,
+                HobbyId = 1,
+                LinkId = 5
+            });
+            modelBuilder.Entity<PersonHobbyLink>().HasData(new PersonHobbyLink
+            {
+                Id = 7,
+                PersonID = 3,
+                HobbyId = 4,
+                LinkId = 6
+            });
         }
     }
 }
