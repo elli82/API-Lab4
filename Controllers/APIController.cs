@@ -1,6 +1,7 @@
 ﻿using API_Lab4.Services;
 using Microsoft.AspNetCore.Mvc;
 using APIModels;
+using API_Lab4.DTO;
 
 namespace API_Lab4.Controllers
 {
@@ -49,7 +50,7 @@ namespace API_Lab4.Controllers
         {
             try
             {
-                var links = _repository.GetPersonsLinks(id);
+                var links = await _repository.GetPersonsLinks(id);
                 return Ok(links);
             }
             catch (Exception)
@@ -59,11 +60,16 @@ namespace API_Lab4.Controllers
         }
 
         [HttpPost("AddnewHobby")]
-        public async Task<IActionResult> AddnewHobby(int hHId, int PId)
+        public async Task<IActionResult> AddnewHobby( PersonHobbyDTO entity)
         {
             try
-            { 
-                var result = await _repository.AddHobbytoPerson(hHId, PId);
+            {
+                var result = new PersonHobbyLink();
+                result.PersonID = entity.PersonId;
+                result.HobbyId = entity.HobbyId;
+                
+                     
+                await _repository.AddHobbytoPerson(result);
                 return Ok(result);
             }
             catch (Exception) 
@@ -73,11 +79,11 @@ namespace API_Lab4.Controllers
         }
 
         [HttpPost("AddnewLink")]
-        public async Task<IActionResult> AddnewLink(int PId, int HId, Link newLink)
+        public async Task<IActionResult> AddnewLink(int PId, int HId, string url)
         {
             try
             {
-                var result = await _repository.AddHobbyandLink(PId, HId, newLink);
+                var result = await _repository.AddHobbyandLink(PId, HId, url);
                 return Ok(result);
             }
             catch (Exception)
