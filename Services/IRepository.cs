@@ -11,10 +11,8 @@ namespace API_Lab4.Services
 
         Task<IEnumerable<Link>> GetPersonsLinks(int Id);
 
+        Task<PersonHobbyLink> AddHobbytoPerson(PersonHobbyLink entity);        
 
-        Task<PersonHobbyLink> AddHobbytoPerson(PersonHobbyLink entity);
-        //Task<int> AddHobbytoPerson(int HId, int PId);
-
-        Task<int> AddHobbyandLink(int PId, int HId, string url);
+        Task<Link> AddLink(int PId, int HId, string url);
     }
 }
