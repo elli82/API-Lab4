@@ -24,12 +24,11 @@ namespace API_Lab4.Controllers
                 var persons = await _repository.GetAll();
                 return Ok(persons);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while retrieving data from database");
-            }
-            
+                Console.WriteLine(e);
+                return BadRequest();
+            }            
         }
 
         [HttpGet("APersonsHobbies")]
@@ -39,9 +38,10 @@ namespace API_Lab4.Controllers
                 var hobbies = await _repository.GetPersonsHobbies(id);
                 return Ok(hobbies);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while retrieving data from database");
+                Console.WriteLine(e);
+                return BadRequest();
             }
         }
 
@@ -53,9 +53,10 @@ namespace API_Lab4.Controllers
                 var links = await _repository.GetPersonsLinks(id);
                 return Ok(links);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while retrieving data from database");
+                Console.WriteLine(e);
+                return BadRequest();
             }
         }
 
@@ -70,11 +71,12 @@ namespace API_Lab4.Controllers
                 
                      
                 await _repository.AddHobbytoPerson(result);
-                return Ok(result);
+                return Ok("Hobby was added to person");
             }
-            catch (Exception) 
+            catch (Exception e) 
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while retrieving data from database");
+                Console.WriteLine(e);
+                return BadRequest();
             }
         }
 
@@ -83,12 +85,13 @@ namespace API_Lab4.Controllers
         {
             try
             {
-                var result = await _repository.AddHobbyandLink(PId, HId, url);
-                return Ok(result);
+                var result = await _repository.AddLink(PId, HId, url);
+                return Ok("A new link was added and connected to person");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while retrieving data from database");
+                Console.WriteLine(e);
+                return BadRequest();
             }
         }
 
