@@ -60,11 +60,12 @@ namespace API_Lab4.Services
 
         public async Task<IEnumerable<Hobby>> GetPersonsHobbies(int Id)
         {
-            var PsHobbies = from phl in _Context.HobbiesPersonsLinks
+            var PsHobbies = (from phl in _Context.HobbiesPersonsLinks
                             join h in _Context.Hobbies on phl.HobbyId equals h.HobbyId
                             join p in _Context.Persons on phl.PersonID equals p.PersonId
                             where phl.PersonID == Id
-                            select h;
+                            select h).Distinct();
+
             return await PsHobbies.ToListAsync();
         }
 
